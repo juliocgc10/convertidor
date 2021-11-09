@@ -1,0 +1,34 @@
+<div class="row m-4">
+    <div class="col-md-4 mb-3">
+        <label for="inputImport" class="form-label">Cantidad a convertir:</label>
+        <input type="number" class="form-control" id="inputImport" [(ngModel)]="import" (input)="executeConvert()"
+            placeholder="Ingrese la cantidad...">
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="selectConvertFrom" class="form-label">De:</label>
+        <select id="selectConvertFrom" [(ngModel)]='convertFrom' class="form-select" (change)="executeConvert()"
+            aria-label="Default select example">
+            <option selected>seleccione una opción</option>
+            <option *ngFor="let divisa of divisas">{{divisa}}</option>
+        </select>
+        <span class="badge bg-secondary">{{1|currency:'':'':'1.2-2'}} {{convertFrom}} = {{divisaConvertFrom|currency:'':'':'1.2-2'}}
+            {{convertTo}}</span>
+    </div>
+    <div class="col-md-4 mb-3">
+        <label for="selectConvertTo" class="form-label">A:</label>
+        <select id="selectConvertTo" [(ngModel)]='convertTo' class="form-select" (change)="executeConvert()"
+            aria-label="Default select example">
+            <option selected>seleccione una opción</option>
+            <option *ngFor="let divisa of divisas">{{divisa}}</option>
+        </select>
+        <span class="badge bg-secondary">{{1|currency:'':'':'1.2-2'}} {{convertTo}} = {{divisaConvertTo|currency:'':'':'1.2-2'}}
+            {{convertFrom}}</span>
+    </div>
+</div>
+<div class="row">
+    <h2 *ngIf="import>0" class="text-center">
+        <span class="badge bg-success mx-1">{{import|currency:'':'':'1.2-2'}} {{convertFrom}}</span>
+        <span class="badge bg-info mx-1">=</span>
+        <span class="badge bg-success mx-1">{{total|currency:'':'':'1.2-2'}} {{convertTo}}</span>
+    </h2>
+</div>
